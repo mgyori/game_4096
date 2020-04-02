@@ -73,7 +73,7 @@ public class App extends Application
 	}
 	
 	/**
-	 * Returns the SLF5J logger instance.
+	 * Returns the SLF4J logger instance.
 	 * @return Returns SLF4J logger.
 	 */
 	public static Logger GetLogger() {
