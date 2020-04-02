@@ -44,13 +44,13 @@ public class App extends Application
 		primaryStage = stage;
 		primaryStage.setTitle("4096 Game");
 
-		GameView gameView = new GameView(5, 5);
-		gameScane = new Scene(gameView.GetView(), 600, 600);
+		GameView gameView = new GameView(Config.SIZE.GetValue(), Config.SIZE.GetValue());
+		gameScane = new Scene(gameView.GetView(), Config.WIDTH.GetValue(), Config.HEIGHT.GetValue());
 		//TODO Capture key press event and passes it to the Table.
 		gameScane.setOnKeyPressed(gameView.GetPanel().getOnKeyPressed());
 				
 		ScoreView scoreView = new ScoreView();
-		scoreScane = new Scene(scoreView, 600, 600);
+		scoreScane = new Scene(scoreView, Config.WIDTH.GetValue(), Config.HEIGHT.GetValue());
 		
 		this.showGame();
 		

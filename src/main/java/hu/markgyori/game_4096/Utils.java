@@ -1,8 +1,6 @@
 package hu.markgyori.game_4096;
 
 public class Utils {
-	private static String[] colors = new String[] {"#e9faa7", "#49d186", "#25b867", "#187843", "#1d968c", "#1d7096", "#1f2aa3", "#9514db", "#d41eb8", "#e01063", "#ff0a3b", "#940925", "#b52414"};
-
 	/**
 	 * This function get the block basic color by point.
 	 * @param num
@@ -13,7 +11,7 @@ public class Utils {
 		while((num = num / 2) >= 1)
 			c++;
 		
-		return colors[c];
+		return Config.colors[c];
 	}
 	
 	/**

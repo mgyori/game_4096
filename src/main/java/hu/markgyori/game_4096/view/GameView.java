@@ -32,7 +32,6 @@ public class GameView extends Table {
 		this.score.setStyle("-fx-font-size: 14px; -fx-padding: 10px; -fx-text-fill: white; -fx-font-weight: bold; -fx-effect: dropshadow(one-pass-box, black, 4, 0.0, 2, 1)");
 		
 		this.panel = new GridPane();
-		this.panel.setPrefSize(600, 600);
 		
 		this.panel.setOnKeyPressed(new EventHandler<KeyEvent>() {
 

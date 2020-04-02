@@ -1,5 +1,6 @@
 package hu.markgyori.game_4096.view;
 
+import hu.markgyori.game_4096.Config;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,8 +16,8 @@ public class ScoreView extends VBox {
 		
 		TableView table = new TableView();
 		table.setEditable(false);
-		table.setMaxWidth(320);
-		table.setMaxHeight(200);
+		table.setMaxWidth(Config.WIDTH.GetValue() * 0.8);
+		table.setMaxHeight(Config.HEIGHT.GetValue() * 0.4);
 		TableColumn place = new TableColumn("Placement");
 		TableColumn name = new TableColumn("Name");
 		TableColumn time = new TableColumn("Time");

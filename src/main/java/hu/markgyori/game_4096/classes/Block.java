@@ -2,6 +2,7 @@ package hu.markgyori.game_4096.classes;
 
 import java.awt.Point;
 
+import hu.markgyori.game_4096.Config;
 import hu.markgyori.game_4096.Utils;
 import hu.markgyori.game_4096.interfaces.IBlock;
 import hu.markgyori.game_4096.interfaces.ITable;
@@ -23,7 +24,7 @@ public class Block implements IBlock {
 		this.isNew = false;
 		
 		this.panel = new StackPane();
-		this.panel.setPrefSize(120, 120);
+		this.panel.setPrefSize(Config.WIDTH.GetValue() / Config.SIZE.GetValue(), Config.HEIGHT.GetValue() / Config.SIZE.GetValue());
 
 		this.label = new Label();
 		this.panel.getChildren().add(this.label);
