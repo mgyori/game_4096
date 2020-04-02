@@ -5,7 +5,7 @@ import java.awt.Point;
 import hu.markgyori.game_4096.Utils;
 import hu.markgyori.game_4096.interfaces.IBlock;
 import hu.markgyori.game_4096.interfaces.ITable;
-
+import hu.markgyori.game_4096.view.GameView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Label;
 
@@ -24,13 +24,13 @@ public class Block implements IBlock {
 		
 		this.panel = new StackPane();
 		this.panel.setPrefSize(153, 153);
-		this.panel.applyCss();
 		
 		this.label = new Label();
 		this.panel.getChildren().add(this.label);
 		
 		// TODO Register block to main panel.
-		this.table.GetPanel().add(this.panel, p.x, p.y);
+		if (this.table instanceof GameView)
+			((GameView)this.table).GetPanel().add(this.panel, p.x, p.y);
 		
 		this.SetPoint(0);
 		this.Render();

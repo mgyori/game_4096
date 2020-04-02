@@ -1,11 +1,12 @@
 package hu.markgyori.game_4096;
 
-import hu.markgyori.game_4096.classes.Table;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import hu.markgyori.game_4096.view.GameView;
 
 /**
  * Main class for 4096 game.
@@ -34,10 +35,10 @@ public class App extends Application
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("4096 Game");
 
-		Table table = new Table(4, 4);
-		Scene scene = new Scene(table.GetPanel(), 600, 600);
+		GameView view = new GameView(4, 4);
+		Scene scene = new Scene(view.GetPanel(), 600, 600);
 		//TODO Capture key press event and passes it to the Table.
-		scene.setOnKeyPressed(table.GetPanel().getOnKeyPressed());
+		scene.setOnKeyPressed(view.GetPanel().getOnKeyPressed());
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();

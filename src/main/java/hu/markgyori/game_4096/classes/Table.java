@@ -6,67 +6,18 @@ import java.util.Random;
 
 import hu.markgyori.game_4096.App;
 import hu.markgyori.game_4096.interfaces.ITable;
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
 
 public class Table implements ITable {
-	private HashMap<Point, Block> blocks;
+	protected HashMap<Point, Block> blocks;
 	private int rows;
 	private int cols;
-	private GridPane panel;
 	private Random rand;
 	
 	public Table(int rows, int cols) {
 		this.rows = rows;
 		this.cols = cols;
 		this.rand = new Random();
-		
-		this.panel = new GridPane();
-		this.panel.setPrefSize(600, 600);
-		
-		this.panel.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-			public void handle(KeyEvent event) {
-				App.GetLogger().debug("Key pressed {}", event.getCharacter());
-				switch(event.getCode()) {
-					case DOWN:
-					case S:
-						MoveDown();
-						break;
-						
-					case UP:
-					case W:
-						MoveUp();
-						break;
-					
-					case LEFT:
-					case A:
-						MoveLeft();
-						break;
-						
-					case RIGHT:
-					case D:
-						MoveRight();
-						break;
-						
-					default:
-						break;
-				}
-			}
-			
-		});
-		
 		this.blocks = new HashMap<Point, Block>();
-		
-		for (int i = 0; i < this.rows; i++) {
-			for (int j = 0; j < this.cols; j++) {
-				Point p = new Point(i, j);
-				this.blocks.put(p, new Block(this, p));
-			}
-		}
-		this.StartGame();
-		this.Render();
 	}
 	
 	public Block GetBlock(int x, int y) {
@@ -84,10 +35,6 @@ public class Table implements ITable {
 	public void Render() {
 		for(Block b : this.blocks.values())
 			b.Render();
-	}
-
-	public GridPane GetPanel() {
-		return this.panel;
 	}
 	
 	private boolean CheckFreeSpace() {
@@ -111,10 +58,11 @@ public class Table implements ITable {
 		this.GetBlock(x, y).SetIsNew(true);
 	}
 	
-	private void StartGame() {
+	protected void StartGame() {
 		App.GetLogger().info("Start game!");
 		this.AddRandomBlock();
 		this.AddRandomBlock();
+		this.Render();
 	}
 	
 	private void NextRound() {

@@ -1,7 +1,5 @@
 package hu.markgyori.game_4096.interfaces;
 
-import javafx.scene.layout.GridPane;
-
 /**
  * Interface for game table. This table use for 4096 game board generation.
  * @author marko
@@ -21,13 +19,7 @@ public interface ITable {
 	 * @return number of columns
 	 */
 	public abstract int GetColumns();
-	
-	/**
-	 * Returns the JavaFX GridPane in the board is drawn.
-	 * @return JavaFX GridPane for table
-	 */
-	public abstract GridPane GetPanel();
-	
+		
 	/**
 	 * Function for move down the blocks.
 	 */
