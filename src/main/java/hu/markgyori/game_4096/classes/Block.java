@@ -23,8 +23,8 @@ public class Block implements IBlock {
 		this.isNew = false;
 		
 		this.panel = new StackPane();
-		this.panel.setPrefSize(153, 153);
-		
+		this.panel.setPrefSize(120, 120);
+
 		this.label = new Label();
 		this.panel.getChildren().add(this.label);
 		
@@ -62,7 +62,7 @@ public class Block implements IBlock {
 
 	public void Render() {
 		this.panel.setStyle("-fx-background-color: " + Utils.GetColorByBlock(this.point) + "; -fx-border-color: black");
-		this.label.setStyle("-fx-font-size:32px; -fx-text-fill: " + Utils.GetTextColorByBlock(this.point));
+		this.label.setStyle("-fx-font-size:32px; -fx-text-fill: " + Utils.GetTextColorByBlock(this.point) + "; -fx-effect: dropshadow(one-pass-box, black, 4, 0.0, 0, 0)");
 		if (this.GetPoint() == 0)
 			this.label.setText("");
 		else
