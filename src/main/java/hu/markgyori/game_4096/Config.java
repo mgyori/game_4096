@@ -10,6 +10,7 @@ public enum Config {
 	WIDTH(600),
 	HEIGHT(600),
 	SIZE(5),
+	MAX_POINT(4096),
 	ADDED_BLOCKS(2);
 
 	private int value;

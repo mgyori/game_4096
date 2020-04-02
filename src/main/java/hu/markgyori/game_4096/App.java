@@ -20,7 +20,9 @@ public class App extends Application
 	private static App instance;
 	
 	private Stage primaryStage;
+	private GameView gameView;
 	private Scene gameScane;
+	private ScoreView scoreView;
 	private Scene scoreScane;
 	
 	/**
@@ -44,27 +46,29 @@ public class App extends Application
 		primaryStage = stage;
 		primaryStage.setTitle("4096 Game");
 
-		GameView gameView = new GameView(Config.SIZE.GetValue(), Config.SIZE.GetValue());
+		gameView = new GameView(Config.SIZE.GetValue(), Config.SIZE.GetValue());
 		gameScane = new Scene(gameView.GetView(), Config.WIDTH.GetValue(), Config.HEIGHT.GetValue());
 		//TODO Capture key press event and passes it to the Table.
 		gameScane.setOnKeyPressed(gameView.GetPanel().getOnKeyPressed());
 				
-		ScoreView scoreView = new ScoreView();
+		scoreView = new ScoreView();
 		scoreScane = new Scene(scoreView, Config.WIDTH.GetValue(), Config.HEIGHT.GetValue());
 		
-		this.showGame();
+		this.ShowGame();
 		
         primaryStage.setResizable(false);
         primaryStage.show();
 	}
 	
-	public void showGame() {
+	public void ShowGame() {
 		primaryStage.setScene(gameScane);
+		gameView.StartGame();
 		GetLogger().info("Show game scane");
 	}
 	
-	public void showScore() {
+	public void ShowScore(int score) {
 		primaryStage.setScene(scoreScane);
+		scoreView.SetScore(score);
 		GetLogger().info("Show score scane");
 	}
 	

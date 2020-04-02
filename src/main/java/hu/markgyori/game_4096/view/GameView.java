@@ -73,8 +73,6 @@ public class GameView extends Table {
 		}
 		
 		this.view.getChildren().addAll(this.panel, this.score);
-		
-		this.StartGame();
 	}
 	
 	/**

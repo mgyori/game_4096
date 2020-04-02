@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import hu.markgyori.game_4096.App;
+import hu.markgyori.game_4096.Config;
 import hu.markgyori.game_4096.interfaces.ITable;
 import hu.markgyori.game_4096.view.GameView;
 
@@ -64,7 +65,7 @@ public class Table implements ITable {
 		this.GetBlock(x, y).SetIsNew(true);
 	}
 	
-	protected void StartGame() {
+	public void StartGame() {
 		App.GetLogger().info("Start game!");
 		
 		this.canAddNew = true;
@@ -99,7 +100,7 @@ public class Table implements ITable {
 		this.Render();
 		
 		if (!CheckAnyMoveable())
-			App.Instance().showScore();
+			App.Instance().ShowScore(this.score);
 	}
 	
 	private boolean CheckAnyMoveable() {
@@ -141,6 +142,9 @@ public class Table implements ITable {
 			selected.SetPoint(0);
 			selected.SetLocked(false);
 			target.SetLocked(true);
+			
+			if (target.GetPoint() == Config.MAX_POINT.GetValue())
+				App.Instance().ShowScore(this.score);
 		}
 	}
 	

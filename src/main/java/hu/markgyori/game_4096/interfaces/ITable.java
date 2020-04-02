@@ -44,4 +44,9 @@ public interface ITable {
 	 * Function for render and update the block and the table design.
 	 */
 	public abstract void Render();
+	
+	/**
+	 * Function for start game and reset score (and viewed blocks).
+	 */
+	public abstract void StartGame();
 }
