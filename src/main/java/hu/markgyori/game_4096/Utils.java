@@ -29,6 +29,6 @@ public class Utils {
 		int g = (color >> 8) & 0xFF;
 		int b = (color >> 0) & 0xFF;
 		
-		return "#" + Integer.toHexString(255 - r) + Integer.toHexString(255 - g) + Integer.toHexString(255 - b);
+		return String.format("#%02x%02x%02x", 255 - r, 255 - g, 255 - b);
 	}
 }

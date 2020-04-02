@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@SuppressWarnings("restriction")
 /**
  * Main class for 4096 game.
  * @author marko

@@ -63,6 +63,9 @@ public class Block implements IBlock {
 	public void Render() {
 		this.panel.setStyle("-fx-background-color: " + Utils.GetColorByBlock(this.point) + "; -fx-border-color: black");
 		this.label.setStyle("-fx-font-size:32px; -fx-text-fill: " + Utils.GetTextColorByBlock(this.point));
-		this.label.setText("" + this.GetPoint());
+		if (this.GetPoint() == 0)
+			this.label.setText("");
+		else
+			this.label.setText(String.format("%d", this.GetPoint()));
 	}
 }
