@@ -22,7 +22,14 @@ public enum Config {
 	public int getValue() {
 		return this.value;
 	}
+	
+	public void setValue(int value) {
+		this.value = value;
+	}
 
-	public static String[] colors = new String[] { "#e9faa7", "#49d186", "#25b867", "#187843", "#1d968c", "#1d7096",
+	public static String[] COLORS = new String[] { "#e9faa7", "#49d186", "#25b867", "#187843", "#1d968c", "#1d7096",
 			"#1f2aa3", "#9514db", "#d41eb8", "#e01063", "#ff0a3b", "#940925", "#b52414" };
+	
+	public static String USER_NAME;
+	public static long GAME_START;
 }

@@ -11,7 +11,7 @@ public class Utils {
 		while((num = num / 2) >= 1)
 			c++;
 		
-		return Config.colors[c];
+		return Config.COLORS[c];
 	}
 	
 	/**

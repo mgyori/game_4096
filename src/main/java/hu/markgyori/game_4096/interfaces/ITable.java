@@ -55,4 +55,6 @@ public interface ITable {
 	 * Function for start game and reset score (and viewed blocks).
 	 */
 	public abstract void startGame();
+	
+	public abstract void resize(int rows, int cols);
 }

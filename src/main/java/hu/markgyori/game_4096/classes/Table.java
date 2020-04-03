@@ -36,6 +36,14 @@ public class Table implements ITable {
 		return this.cols;
 	}
 	
+	public void resize(int rows, int cols) {
+		this.rows = rows;
+		this.cols = cols;
+		
+		if(this instanceof GameView)
+			((GameView)this).initBlocks();
+	}
+	
 	public void render() {
 		for(Block b : this.blocks.values())
 			b.render();
@@ -67,6 +75,8 @@ public class Table implements ITable {
 	
 	public void startGame() {
 		App.getLogger().info("Start game!");
+		
+		Config.GAME_START = System.currentTimeMillis();
 		
 		this.canAddNew = true;
 		this.score = 0;

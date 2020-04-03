@@ -65,14 +65,21 @@ public class GameView extends Table {
 			
 		});
 		
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < cols; j++) {
+		this.initBlocks();
+		
+		this.view.getChildren().addAll(this.panel, this.score);
+	}
+	
+	public void initBlocks() {
+		for(Block b : this.blocks.values())
+			this.panel.getChildren().remove(b.getPanel());
+		this.blocks.clear();
+		for (int i = 0; i < this.getRows(); i++) {
+			for (int j = 0; j < this.getColumns(); j++) {
 				Point p = new Point(i, j);
 				this.blocks.put(p, new Block(this, p));
 			}
 		}
-		
-		this.view.getChildren().addAll(this.panel, this.score);
 	}
 	
 	/**

@@ -1,5 +1,7 @@
 package hu.markgyori.game_4096.interfaces;
 
+import javafx.scene.layout.StackPane;
+
 /**
  * Block interface for 4096 game blocks.
  * @author marko
@@ -18,6 +20,8 @@ public interface IBlock {
 	 * @param num
 	 */
 	public abstract void setPoint(int num);
+	
+	public abstract StackPane getPanel();
 	
 	/**
 	 * Returns the block lock state.

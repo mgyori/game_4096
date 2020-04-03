@@ -60,6 +60,10 @@ public class Block implements IBlock {
 	public void setIsNew(boolean state) {
 		this.isNew = state;
 	}
+	
+	public StackPane getPanel() {
+		return this.panel;
+	}
 
 	public void render() {
 		this.panel.setStyle("-fx-background-color: " + Utils.getColorByBlock(this.point) + "; -fx-border-color: black");
