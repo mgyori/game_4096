@@ -7,7 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import hu.markgyori.game_4096.Config;
 import hu.markgyori.game_4096.model.UserData;
 
 public class UserFactory {
@@ -20,7 +19,7 @@ public class UserFactory {
 	public List<UserData> getUsers() {
 		EntityManager em = factory.createEntityManager();
         try {
-            Query q = em.createQuery("SELECT c FROM UserData c ORDER BY c.score DESC", UserData.class);
+            Query q = em.createQuery("SELECT c FROM UserData c ORDER BY c.score DESC", UserData.class).setMaxResults(50);
             @SuppressWarnings("unchecked")
 			List<UserData> data = q.getResultList();
             int index = 1;

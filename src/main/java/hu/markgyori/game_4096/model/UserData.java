@@ -16,7 +16,7 @@ import lombok.Data;
 public class UserData {
 	@Id
 	@Column(name="id", nullable=false)
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name="score")
