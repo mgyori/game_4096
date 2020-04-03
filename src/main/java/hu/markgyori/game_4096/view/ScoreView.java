@@ -24,14 +24,14 @@ public class ScoreView extends VBox {
 		
 		this.btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				App.Instance().ShowGame();
+				App.getInstance().showGame();
 			}
 		});
 		
 		this.table = new TableView();
 		this.table.setEditable(false);
-		this.table.setMaxWidth(Config.WIDTH.GetValue() * 0.8);
-		this.table.setMaxHeight(Config.HEIGHT.GetValue() * 0.4);
+		this.table.setMaxWidth(Config.WIDTH.getValue() * 0.8);
+		this.table.setMaxHeight(Config.HEIGHT.getValue() * 0.4);
 		TableColumn place = new TableColumn("Placement");
 		TableColumn name = new TableColumn("Name");
 		TableColumn time = new TableColumn("Time");
@@ -49,7 +49,7 @@ public class ScoreView extends VBox {
 		this.getChildren().addAll(title, table, score, btn);
 	}
 	
-	public void SetScore(int score) {
+	public void setScore(int score) {
 		this.score.setText(String.format("Your points: %d!", score));
 	}
 }

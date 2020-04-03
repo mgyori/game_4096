@@ -19,7 +19,7 @@ public enum Config {
 		this.value = value;
 	};
 
-	public int GetValue() {
+	public int getValue() {
 		return this.value;
 	}
 

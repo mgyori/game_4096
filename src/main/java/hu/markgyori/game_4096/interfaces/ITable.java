@@ -6,47 +6,53 @@ package hu.markgyori.game_4096.interfaces;
  * 
  */
 public interface ITable {
-	public abstract IBlock GetBlock(int x, int y);
+	/**
+	 * Get the game block in specified location.
+	 * @param x
+	 * @param y
+	 * @return The block in x-y coordinate.
+	 */
+	public abstract IBlock getBlock(int x, int y);
 	
 	/**
 	 * Returns the table rows count.
 	 * @return number of rows
 	 */
-	public abstract int GetRows();
+	public abstract int getRows();
 	
 	/**
 	 * Returns the table columns count.
 	 * @return number of columns
 	 */
-	public abstract int GetColumns();
+	public abstract int getColumns();
 		
 	/**
 	 * Function for move down the blocks.
 	 */
-	public abstract void MoveDown();
+	public abstract void moveDown();
 	
 	/**
 	 * Function for move up the blocks.
 	 */
-	public abstract void MoveUp();
+	public abstract void moveUp();
 	
 	/**
 	 * Function for move left the blocks.
 	 */
-	public abstract void MoveLeft();
+	public abstract void moveLeft();
 	
 	/**
 	 * Function for move right the blocks.
 	 */
-	public abstract void MoveRight();
+	public abstract void moveRight();
 	
 	/**
 	 * Function for render and update the block and the table design.
 	 */
-	public abstract void Render();
+	public abstract void render();
 	
 	/**
 	 * Function for start game and reset score (and viewed blocks).
 	 */
-	public abstract void StartGame();
+	public abstract void startGame();
 }

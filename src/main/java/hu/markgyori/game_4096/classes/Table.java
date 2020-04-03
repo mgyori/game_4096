@@ -24,32 +24,32 @@ public class Table implements ITable {
 		this.blocks = new HashMap<Point, Block>();
 	}
 	
-	public Block GetBlock(int x, int y) {
+	public Block getBlock(int x, int y) {
 		return this.blocks.get(new Point(x, y));
 	}
 
-	public int GetRows() {
+	public int getRows() {
 		return this.rows;
 	}
 
-	public int GetColumns() {
+	public int getColumns() {
 		return this.cols;
 	}
 	
-	public void Render() {
+	public void render() {
 		for(Block b : this.blocks.values())
-			b.Render();
+			b.render();
 	}
 	
-	private boolean CheckFreeSpace() {
+	private boolean checkFreeSpace() {
 		for(Block b : this.blocks.values())
-			if (b.GetPoint() == 0)
+			if (b.getPoint() == 0)
 				return true;
 		return false;
 	}
 	
-	private void AddRandomBlock() {
-		if (!CheckFreeSpace())
+	private void addRandomBlock() {
+		if (!checkFreeSpace())
 			return;
 		
 		int x = 0, y = 0;
@@ -57,62 +57,62 @@ public class Table implements ITable {
 		do {
 			x = this.rand.nextInt(this.cols);
 			y = this.rand.nextInt(this.rows);
-		} while (this.GetBlock(x, y).GetPoint() != 0);
+		} while (this.getBlock(x, y).getPoint() != 0);
 		
-		App.GetLogger().debug("Add new block to x: {} y: {}!", x, y);
+		App.getLogger().debug("Add new block to x: {} y: {}!", x, y);
 		
-		this.GetBlock(x, y).SetPoint(this.rand.nextInt(10) < 4 ? 4 : 2);
-		this.GetBlock(x, y).SetIsNew(true);
+		this.getBlock(x, y).setPoint(this.rand.nextInt(10) < 4 ? 4 : 2);
+		this.getBlock(x, y).setIsNew(true);
 	}
 	
-	public void StartGame() {
-		App.GetLogger().info("Start game!");
+	public void startGame() {
+		App.getLogger().info("Start game!");
 		
 		this.canAddNew = true;
 		this.score = 0;
 		
 		for(Block b : this.blocks.values()) {
-			b.SetPoint(0);
-			b.SetIsNew(false);
-			b.SetLocked(false);
+			b.setPoint(0);
+			b.setIsNew(false);
+			b.setLocked(false);
 		}
 		
-		this.NextRound();
+		this.nextRound();
 	}
 	
-	private void NextRound() {
-		App.GetLogger().debug("Start next round!");
+	private void nextRound() {
+		App.getLogger().debug("Start next round!");
 		
-		this.UnlockAllBlock();
+		this.unlockAllBlock();
 		
-		if (!this.CheckFreeSpace()) {
-			App.GetLogger().warn("No free space!");
+		if (!this.checkFreeSpace()) {
+			App.getLogger().warn("No free space!");
 		} else {
 			if (canAddNew) {
-				this.AddRandomBlock();
-				this.AddRandomBlock();
+				for (int i = 0; i < Config.ADDED_BLOCKS.getValue(); i++)
+					this.addRandomBlock();
 			}
 		}
 		
 		if(this instanceof GameView)
-			((GameView)this).SetScore(this.score);
+			((GameView)this).setScore(this.score);
 		
-		this.Render();
+		this.render();
 		
-		if (!CheckAnyMoveable())
-			App.Instance().ShowScore(this.score);
+		if (!checkAnyMoveable())
+			App.getInstance().showScore(this.score);
 	}
 	
-	private boolean CheckAnyMoveable() {
+	private boolean checkAnyMoveable() {
 		for (int i = 0; i < this.rows - 1; i++) {
 			for (int j = 0; j < this.cols - 1; j++) {
-				Block thisBlock = this.GetBlock(i, j);
-				Block downerBlock = this.GetBlock(i + 1, j);
-				Block rightBlock = this.GetBlock(i, j + 1);
+				Block thisBlock = this.getBlock(i, j);
+				Block downerBlock = this.getBlock(i + 1, j);
+				Block rightBlock = this.getBlock(i, j + 1);
 				
-				if (thisBlock.GetPoint() == 0 || downerBlock.GetPoint() == 0 || rightBlock.GetPoint() == 0)
+				if (thisBlock.getPoint() == 0 || downerBlock.getPoint() == 0 || rightBlock.getPoint() == 0)
 					return true;
-				else if (thisBlock.GetPoint() == downerBlock.GetPoint() || thisBlock.GetPoint() == rightBlock.GetPoint())
+				else if (thisBlock.getPoint() == downerBlock.getPoint() || thisBlock.getPoint() == rightBlock.getPoint())
 					return true;
 			}
 		}
@@ -120,36 +120,36 @@ public class Table implements ITable {
 		return false;
 	}
 	
-	private void UnlockAllBlock() {
-		App.GetLogger().debug("Unlocked all block");
+	private void unlockAllBlock() {
+		App.getLogger().debug("Unlocked all block");
 		for(Block b : this.blocks.values()) {
-			b.SetLocked(false);
-			b.SetIsNew(false);
+			b.setLocked(false);
+			b.setIsNew(false);
 		}
 	}
 	
-	private void ProcessBlocks(Block selected, Block target) {
-		if (selected.GetPoint() != 0 && target.GetPoint() == 0) {
-			target.SetPoint(selected.GetPoint());
-			selected.SetPoint(0);
-			selected.SetLocked(false);
-			target.SetLocked(false);
+	private void processBlocks(Block selected, Block target) {
+		if (selected.getPoint() != 0 && target.getPoint() == 0) {
+			target.setPoint(selected.getPoint());
+			selected.setPoint(0);
+			selected.setLocked(false);
+			target.setLocked(false);
 			this.canAddNew = true;
-		} else if (selected.GetPoint() != 0 && selected.GetPoint() == target.GetPoint()) {
-			this.score+=selected.GetPoint();
+		} else if (selected.getPoint() != 0 && selected.getPoint() == target.getPoint()) {
+			this.score+=selected.getPoint();
 			this.canAddNew = true;
-			target.SetPoint(selected.GetPoint() * 2);
-			selected.SetPoint(0);
-			selected.SetLocked(false);
-			target.SetLocked(true);
+			target.setPoint(selected.getPoint() * 2);
+			selected.setPoint(0);
+			selected.setLocked(false);
+			target.setLocked(true);
 			
-			if (target.GetPoint() == Config.MAX_POINT.GetValue())
-				App.Instance().ShowScore(this.score);
+			if (target.getPoint() == Config.MAX_POINT.getValue())
+				App.getInstance().showScore(this.score);
 		}
 	}
 	
-	public void MoveDown() {
-		App.GetLogger().debug("Move down");
+	public void moveDown() {
+		App.getLogger().debug("Move down");
 		this.canAddNew = false;
 		for (int i = 0; i < this.rows; i++) {
 			for (int j = this.cols - 2; j >= 0; j--) {
@@ -161,24 +161,24 @@ public class Table implements ITable {
 					if (thisY + 1 >= this.cols)
 						break;
 					
-					Block thisBlock = this.GetBlock(thisX, thisY);
-					if (thisBlock.IsLocked())
+					Block thisBlock = this.getBlock(thisX, thisY);
+					if (thisBlock.isLocked())
 						continue;
 					
-					Block downerBlock = this.GetBlock(thisX, thisY + 1);
-					if (downerBlock.IsLocked())
+					Block downerBlock = this.getBlock(thisX, thisY + 1);
+					if (downerBlock.isLocked())
 						continue;
 					
-					this.ProcessBlocks(thisBlock, downerBlock);
+					this.processBlocks(thisBlock, downerBlock);
 				}
 			}
 		}
 		
-		this.NextRound();
+		this.nextRound();
 	}
 	
-	public void MoveUp() {
-		App.GetLogger().debug("Move up");
+	public void moveUp() {
+		App.getLogger().debug("Move up");
 		this.canAddNew = false;
 		for (int i = 0; i < this.rows; i++) {
 			for (int j = 1; j < this.cols; j++) {
@@ -190,24 +190,24 @@ public class Table implements ITable {
 					if (thisY - 1 < 0)
 						break;
 					
-					Block thisBlock = this.GetBlock(thisX, thisY);
-					if (thisBlock.IsLocked())
+					Block thisBlock = this.getBlock(thisX, thisY);
+					if (thisBlock.isLocked())
 						continue;
 					
-					Block upperBlock = this.GetBlock(thisX, thisY - 1);
-					if (upperBlock.IsLocked())
+					Block upperBlock = this.getBlock(thisX, thisY - 1);
+					if (upperBlock.isLocked())
 						continue;
 					
-					this.ProcessBlocks(thisBlock, upperBlock);
+					this.processBlocks(thisBlock, upperBlock);
 				}
 			}
 		}
 		
-		this.NextRound();
+		this.nextRound();
 	}
 
-	public void MoveLeft() {
-		App.GetLogger().debug("Move Left");
+	public void moveLeft() {
+		App.getLogger().debug("Move Left");
 		this.canAddNew = false;
 		for (int i = 1; i < this.rows; i++) {
 			for (int j = 0; j < this.cols; j++) {
@@ -219,24 +219,24 @@ public class Table implements ITable {
 					if (thisX - 1 < 0)
 						break;
 
-					Block thisBlock = this.GetBlock(thisX, thisY);
-					if (thisBlock.IsLocked())
+					Block thisBlock = this.getBlock(thisX, thisY);
+					if (thisBlock.isLocked())
 						continue;
 					
-					Block leftBlock = this.GetBlock(thisX - 1, thisY);
-					if (leftBlock.IsLocked())
+					Block leftBlock = this.getBlock(thisX - 1, thisY);
+					if (leftBlock.isLocked())
 						continue;
 					
-					this.ProcessBlocks(thisBlock, leftBlock);
+					this.processBlocks(thisBlock, leftBlock);
 				}
 			}
 		}
 		
-		this.NextRound();
+		this.nextRound();
 	}
 
-	public void MoveRight() {
-		App.GetLogger().debug("Move Right");
+	public void moveRight() {
+		App.getLogger().debug("Move Right");
 		this.canAddNew = false;
 		for (int i = this.rows - 2; i >= 0; i--) {
 			for (int j = 0; j < this.cols; j++) {
@@ -248,19 +248,19 @@ public class Table implements ITable {
 					if (thisX + 1 >= this.rows)
 						break;
 					
-					Block thisBlock = this.GetBlock(thisX, thisY);
-					if (thisBlock.IsLocked())
+					Block thisBlock = this.getBlock(thisX, thisY);
+					if (thisBlock.isLocked())
 						continue;
 					
-					Block rightBlock = this.GetBlock(thisX + 1, thisY);
-					if (rightBlock.IsLocked())
+					Block rightBlock = this.getBlock(thisX + 1, thisY);
+					if (rightBlock.isLocked())
 						continue;
 					
-					this.ProcessBlocks(thisBlock, rightBlock);
+					this.processBlocks(thisBlock, rightBlock);
 				}
 			}
 		}
 		
-		this.NextRound();
+		this.nextRound();
 	}
 }

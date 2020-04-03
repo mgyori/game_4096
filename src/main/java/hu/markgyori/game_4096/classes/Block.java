@@ -24,49 +24,49 @@ public class Block implements IBlock {
 		this.isNew = false;
 		
 		this.panel = new StackPane();
-		this.panel.setPrefSize(Config.WIDTH.GetValue() / Config.SIZE.GetValue(), Config.HEIGHT.GetValue() / Config.SIZE.GetValue());
+		this.panel.setPrefSize(Config.WIDTH.getValue() / Config.SIZE.getValue(), Config.HEIGHT.getValue() / Config.SIZE.getValue());
 
 		this.label = new Label();
 		this.panel.getChildren().add(this.label);
 		
 		// TODO Register block to main panel.
 		if (this.table instanceof GameView)
-			((GameView)this.table).GetPanel().add(this.panel, p.x, p.y);
+			((GameView)this.table).getPanel().add(this.panel, p.x, p.y);
 		
-		this.SetPoint(0);
-		this.Render();
+		this.setPoint(0);
+		this.render();
 	}
 	
-	public int GetPoint() {
+	public int getPoint() {
 		return this.point;
 	}
 
-	public void SetPoint(int num) {
+	public void setPoint(int num) {
 		this.point = num;
 	}
 	
-	public boolean IsLocked() {
+	public boolean isLocked() {
 		return this.locked && this.point > 0;
 	}
 	
-	public void SetLocked(boolean state) {
+	public void setLocked(boolean state) {
 		this.locked = state;
 	}
 	
-	public boolean IsNew() {
+	public boolean isNew() {
 		return this.isNew;
 	}
 	
-	public void SetIsNew(boolean state) {
+	public void setIsNew(boolean state) {
 		this.isNew = state;
 	}
 
-	public void Render() {
-		this.panel.setStyle("-fx-background-color: " + Utils.GetColorByBlock(this.point) + "; -fx-border-color: black");
-		this.label.setStyle("-fx-font-size:32px; -fx-text-fill: " + Utils.GetTextColorByBlock(this.point) + "; -fx-effect: dropshadow(one-pass-box, black, 4, 0.0, 0, 0)");
-		if (this.GetPoint() == 0)
+	public void render() {
+		this.panel.setStyle("-fx-background-color: " + Utils.getColorByBlock(this.point) + "; -fx-border-color: black");
+		this.label.setStyle("-fx-font-size:32px; -fx-text-fill: " + Utils.getTextColorByBlock(this.point) + "; -fx-effect: dropshadow(one-pass-box, black, 4, 0.0, 0, 0)");
+		if (this.getPoint() == 0)
 			this.label.setText("");
 		else
-			this.label.setText(String.format("%d", this.GetPoint()));
+			this.label.setText(String.format("%d", this.getPoint()));
 	}
 }

@@ -36,26 +36,26 @@ public class GameView extends Table {
 		this.panel.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 			public void handle(KeyEvent event) {
-				App.GetLogger().debug("Key pressed {}", event.getCharacter());
+				App.getLogger().debug("Key pressed {}", event.getCharacter());
 				switch(event.getCode()) {
 					case DOWN:
 					case S:
-						MoveDown();
+						moveDown();
 						break;
 						
 					case UP:
 					case W:
-						MoveUp();
+						moveUp();
 						break;
 					
 					case LEFT:
 					case A:
-						MoveLeft();
+						moveLeft();
 						break;
 						
 					case RIGHT:
 					case D:
-						MoveRight();
+						moveRight();
 						break;
 						
 					default:
@@ -79,7 +79,7 @@ public class GameView extends Table {
 	 * Returns the JavaFX GridPane where the board is drawn.
 	 * @return JavaFX GridPane for table
 	 */
-	public GridPane GetPanel() {
+	public GridPane getPanel() {
 		return this.panel;
 	}
 	
@@ -87,7 +87,7 @@ public class GameView extends Table {
 	 * Returns the JavaFX StackPane. Use to draw stacked game panels.
 	 * @return JavaFX StackPane for game stack view.
 	 */
-	public StackPane GetView() {
+	public StackPane getView() {
 		return this.view;
 	}
 	
@@ -95,7 +95,7 @@ public class GameView extends Table {
 	 * Set score text in game view.
 	 * @param score
 	 */
-	public void SetScore(int score) {
+	public void setScore(int score) {
 		this.score.setText(String.format("Your points: %d", score));
 	}
 }
