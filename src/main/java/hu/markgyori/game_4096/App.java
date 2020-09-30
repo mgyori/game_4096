@@ -36,13 +36,13 @@ public class App extends Application
 	public Stage primaryStage;
 	
 	private GameView gameView;
-	private Scene gameScane;
+	private Scene gameScene;
 	
 	private ScoreView scoreView;
-	private Scene scoreScane;
+	private Scene scoreScene;
 	
 	private MainMenuView mainMenuView;
-	private Scene mainMenuScane;
+	private Scene mainMenuScene;
 	
 	/**
 	 * Main class main function. This launch the JavaFX application window.
@@ -67,15 +67,15 @@ public class App extends Application
 		primaryStage.setTitle("4096 Game");
 
 		gameView = new GameView(Config.SIZE.getValue(), Config.SIZE.getValue());
-		gameScane = new Scene(gameView.getView(), Config.WIDTH.getValue(), Config.HEIGHT.getValue());
+		gameScene = new Scene(gameView.getView(), Config.WIDTH.getValue(), Config.HEIGHT.getValue());
 		//TODO Capture key press event and passes it to the Table.
-		gameScane.setOnKeyPressed(gameView.getPanel().getOnKeyPressed());
+		gameScene.setOnKeyPressed(gameView.getPanel().getOnKeyPressed());
 				
 		scoreView = new ScoreView();
-		scoreScane = new Scene(scoreView, Config.WIDTH.getValue(), Config.HEIGHT.getValue());
+		scoreScene = new Scene(scoreView, Config.WIDTH.getValue(), Config.HEIGHT.getValue());
 		
 		mainMenuView = new MainMenuView();
-		mainMenuScane = new Scene(mainMenuView, Config.WIDTH.getValue(), Config.HEIGHT.getValue());
+		mainMenuScene = new Scene(mainMenuView, Config.WIDTH.getValue(), Config.HEIGHT.getValue());
 		
 		this.showMainMenu();
 		
@@ -109,10 +109,10 @@ public class App extends Application
 	}
 	
 	public void showGame() {
-		primaryStage.setScene(gameScane);
+		primaryStage.setScene(gameScene);
 		gameView.resize(Config.SIZE.getValue(), Config.SIZE.getValue());
 		gameView.startGame();
-		getLogger().info("Show game scane");
+		getLogger().info("Show game Scene");
 	}
 	
 	public void showScore(int score) {
@@ -123,14 +123,14 @@ public class App extends Application
 			data.setTime((int)((System.currentTimeMillis() - Config.GAME_START) / 1000));
 			users.addUserData(data);
 		}
-		primaryStage.setScene(scoreScane);
+		primaryStage.setScene(scoreScene);
 		scoreView.setScore(score);
-		getLogger().info("Show score scane");
+		getLogger().info("Show score Scene");
 	}
 	
 	public void showMainMenu() {
-		primaryStage.setScene(mainMenuScane);
-		getLogger().info("Show main menu scane");
+		primaryStage.setScene(mainMenuScene);
+		getLogger().info("Show main menu Scene");
 	}
 	
 	public static App getInstance() {
